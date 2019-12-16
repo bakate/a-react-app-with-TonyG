@@ -1,24 +1,3 @@
-export function increment() {
-  return {
-    type: 'INCREMENT',
-  };
-}
-export function decrement() {
-  return {
-    type: 'DECREMENT',
-  };
-}
-export function double() {
-  return {
-    type: 'DOUBLE',
-  };
-}
-export function halve() {
-  return {
-    type: 'HALVE',
-  };
-}
-
 export default function countReducer(count = 0, action) {
   switch (action.type) {
     case 'INCREMENT':

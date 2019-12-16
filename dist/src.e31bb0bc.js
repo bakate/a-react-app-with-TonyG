@@ -38393,41 +38393,162 @@ if ("development" !== 'production' && "development" !== 'test' && typeof window 
 
 var _default = styled;
 exports.default = _default;
-},{"stylis/stylis.min":"../node_modules/stylis/stylis.min.js","stylis-rule-sheet":"../node_modules/stylis-rule-sheet/index.js","react":"../node_modules/react/index.js","@emotion/unitless":"../node_modules/@emotion/unitless/dist/unitless.browser.esm.js","react-is":"../node_modules/react-is/index.js","memoize-one":"../node_modules/memoize-one/dist/memoize-one.esm.js","prop-types":"../node_modules/prop-types/index.js","@emotion/is-prop-valid":"../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","merge-anything":"../node_modules/merge-anything/dist/index.esm.js","process":"../node_modules/process/browser.js"}],"Redux/actions-creators & reducers/count.js":[function(require,module,exports) {
+},{"stylis/stylis.min":"../node_modules/stylis/stylis.min.js","stylis-rule-sheet":"../node_modules/stylis-rule-sheet/index.js","react":"../node_modules/react/index.js","@emotion/unitless":"../node_modules/@emotion/unitless/dist/unitless.browser.esm.js","react-is":"../node_modules/react-is/index.js","memoize-one":"../node_modules/memoize-one/dist/memoize-one.esm.js","prop-types":"../node_modules/prop-types/index.js","@emotion/is-prop-valid":"../node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","merge-anything":"../node_modules/merge-anything/dist/index.esm.js","process":"../node_modules/process/browser.js"}],"styles/Button.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.increment = increment;
-exports.decrement = decrement;
-exports.double = double;
-exports.halve = halve;
-exports.default = countReducer;
+exports.default = void 0;
 
-function increment() {
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _templateObject() {
+  var data = _taggedTemplateLiteral(["\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));\n  grid-gap: 20px;\n  button {\n    border-radius: 5px;\n    text-transform: capitalize;\n    width: auto;\n    background: midnightblue;\n    color: white;\n    border: 0;\n    font-size: 2rem;\n    font-weight: 600;\n    padding: 0.5rem 1.2rem;\n  }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+
+var ButtonStyles = _styledComponents.default.div(_templateObject());
+
+var _default = ButtonStyles;
+exports.default = _default;
+},{"styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js"}],"actions/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.removeFavoriteThing = exports.addFavoriteThing = exports.halve = exports.double = exports.decrement = exports.increment = void 0;
+
+var increment = function increment() {
   return {
     type: 'INCREMENT'
   };
-}
+};
 
-function decrement() {
+exports.increment = increment;
+
+var decrement = function decrement() {
   return {
     type: 'DECREMENT'
   };
-}
+};
 
-function double() {
+exports.decrement = decrement;
+
+var double = function double() {
   return {
     type: 'DOUBLE'
   };
-}
+};
 
-function halve() {
+exports.double = double;
+
+var halve = function halve() {
   return {
     type: 'HALVE'
   };
-}
+};
+
+exports.halve = halve;
+
+var addFavoriteThing = function addFavoriteThing(text) {
+  return {
+    type: 'ADD_FAVORITE_THING',
+    id: Math.random(Date.now()),
+    text: text
+  };
+};
+
+exports.addFavoriteThing = addFavoriteThing;
+
+var removeFavoriteThing = function removeFavoriteThing(id) {
+  return {
+    type: 'REMOVE_FAVORITE_THING',
+    id: id
+  };
+};
+
+exports.removeFavoriteThing = removeFavoriteThing;
+},{}],"components/Couting.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var _Button = _interopRequireDefault(require("../styles/Button"));
+
+var _actions = require("../actions");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* eslint-disable no-shadow */
+
+/* eslint-disable react/prop-types */
+var Counting = function Counting(_ref) {
+  var count = _ref.count,
+      increment = _ref.increment,
+      decrement = _ref.decrement,
+      double = _ref.double,
+      halve = _ref.halve;
+  return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Count goes here papi ", count), _react.default.createElement(_Button.default, null, _react.default.createElement("button", {
+    onClick: increment,
+    type: "button"
+  }, "Plus"), _react.default.createElement("button", {
+    onClick: decrement,
+    type: "button"
+  }, "Minus"), _react.default.createElement("button", {
+    onClick: double,
+    type: "button"
+  }, "Multiply by 2"), _react.default.createElement("button", {
+    onClick: halve,
+    type: "button"
+  }, "Halve")));
+}; // const mapStateToProps /* or whatever we want */ = rootReducer => ({
+//   count: rootReducer.count,
+// });
+// const mapDispatchToProps = {
+//   increment,
+//   decrement,
+//   double,
+//   halve
+// }
+
+
+var _default = (0, _reactRedux.connect)(function (rootreducer) {
+  return {
+    count: rootreducer.count
+  };
+}, {
+  increment: _actions.increment,
+  decrement: _actions.decrement,
+  double: _actions.double,
+  halve: _actions.halve
+})(Counting);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../styles/Button":"styles/Button.js","../actions":"actions/index.js"}],"reducers/count.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = countReducer;
 
 function countReducer() {
   var count = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
@@ -38450,7 +38571,70 @@ function countReducer() {
       return count;
   }
 }
-},{}],"components/hello.js":[function(require,module,exports) {
+},{}],"reducers/favoriteThings.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = favoriteThingsReducer;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function favoriteThingsReducer() {
+  var favoriteThings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case 'ADD_FAVORITE_THING':
+      return [].concat(_toConsumableArray(favoriteThings), [{
+        id: action.id,
+        text: action.text
+      }]);
+
+    case 'REMOVE_FAVORITE_THING':
+      {
+        var updatedArr = [].concat(_toConsumableArray(favoriteThings.slice(0, action.id)), _toConsumableArray(favoriteThings.slice(action.action.id + 1)));
+        return updatedArr;
+      }
+
+    default:
+      return favoriteThings;
+  }
+}
+},{}],"reducers/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _redux = require("redux");
+
+var _count = _interopRequireDefault(require("./count"));
+
+var _favoriteThings = _interopRequireDefault(require("./favoriteThings"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+  count: _count.default,
+  favoriteThings: _favoriteThings.default
+});
+var store = (0, _redux.createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+store.subscribe(function () {
+  return store.getState();
+});
+var _default = store;
+exports.default = _default;
+},{"redux":"../node_modules/redux/es/redux.js","./count":"reducers/count.js","./favoriteThings":"reducers/favoriteThings.js"}],"components/Favoriting.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38462,222 +38646,54 @@ var _react = _interopRequireDefault(require("react"));
 
 var _reactRedux = require("react-redux");
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _Button = _interopRequireDefault(require("../styles/Button"));
 
-var _count = require("../Redux/actions-creators & reducers/count");
+var _actions = require("../actions");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: grid;\n  grid-auto-columns: repeat(4, 1fr);\n  gap: 15px;\n  button {\n    font-size: 18px;\n  }\n"]);
+var Favoriting = function Favoriting(_ref) {
+  var favorite = _ref.favorite,
+      addFavoriteThing = _ref.addFavoriteThing,
+      removeFavoriteThing = _ref.removeFavoriteThing;
+  var input;
 
-  _templateObject = function _templateObject() {
-    return data;
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    addFavoriteThing(input.value);
+    input.value = '';
   };
 
-  return data;
-}
-
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
-var ButtonStyles = _styledComponents.default.div(_templateObject());
-
-var Hello = function Hello(_ref) {
-  var count = _ref.count,
-      increment = _ref.increment,
-      decrement = _ref.decrement,
-      double = _ref.double,
-      halve = _ref.halve;
-  return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Count goes here papi ", count), _react.default.createElement(ButtonStyles, null, _react.default.createElement("button", {
-    onClick: increment,
-    type: "button"
-  }, "Plus"), _react.default.createElement("button", {
-    onClick: decrement,
-    type: "button"
-  }, "Minus"), _react.default.createElement("button", {
-    onClick: double,
-    type: "button"
-  }, "Times per 2"), _react.default.createElement("button", {
-    onClick: halve,
-    type: "button"
-  }, "Halve")));
-}; // const mapStateToProps /* or whatever we want */ = rootReducer => ({
-//   count: rootReducer.count,
-// });
-// const mapDispatchToProps = {
-//   increment,
-//   decrement,
-//   double,
-//   halve
-// }
-
+  return _react.default.createElement("div", null, _react.default.createElement("p", null, "Insert your Favorite things below"), _react.default.createElement("form", {
+    onSubmit: handleSubmit
+  }, _react.default.createElement(_Button.default, null, _react.default.createElement("label", {
+    htmlFor: "Favorite Thing"
+  }, "Favorite Thing", _react.default.createElement("br", null), _react.default.createElement("input", {
+    type: "text",
+    ref: function ref(node) {
+      return input = node;
+    },
+    placeholder: "Add your favorite thing"
+  })), _react.default.createElement("button", {
+    type: "submit"
+  }, "Add"), _react.default.createElement("h3", null, "Here are your Favorite Things"), _react.default.createElement("ul", null, favorite.map(function (fav) {
+    return _react.default.createElement("li", {
+      key: fav.id
+    }, fav);
+  })))));
+};
 
 var _default = (0, _reactRedux.connect)(function (rootreducer) {
   return {
-    count: rootreducer.count
+    favorite: rootreducer.favoriteThings
   };
 }, {
-  increment: _count.increment,
-  decrement: _count.decrement,
-  double: _count.double,
-  halve: _count.halve
-})(Hello);
+  addFavoriteThing: _actions.addFavoriteThing,
+  removeFavoriteThing: _actions.removeFavoriteThing
+})(Favoriting);
 
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../Redux/actions-creators & reducers/count":"Redux/actions-creators & reducers/count.js"}],"Redux/actions-creators & reducers/favoriteThings.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.addFavoriteThing = addFavoriteThing;
-exports.removeFavoriteThing = removeFavoriteThing;
-exports.default = favoriteThingsReducer;
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
-
-function addFavoriteThing(thing) {
-  return {
-    type: 'ADD_FAVORITE_THING',
-    payload: thing
-  };
-}
-
-function removeFavoriteThing(thing) {
-  return {
-    type: 'REMOVE_FAVORITE_THING',
-    payload: thing
-  };
-}
-
-function favoriteThingsReducer() {
-  var favoriteThings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case 'ADD_FAVORITE_THING':
-      return [].concat(_toConsumableArray(favoriteThings), [action.payload]);
-
-    case 'REMOVE_FAVORITE_THING':
-      {
-        var updatedArr = favoriteThings.filter(function (thing) {
-          return thing.toLowerCase() !== action.payload.toLowerCase();
-        });
-        return updatedArr;
-      }
-
-    default:
-      return favoriteThings;
-  }
-}
-},{}],"Redux/actions-creators & reducers/instagram.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.setTitle = setTitle;
-exports.upVoteVideo = upVoteVideo;
-exports.downVoteVideo = downVoteVideo;
-exports.default = instagramReducer;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function setTitle(title) {
-  return {
-    type: 'SET_TITLE',
-    payload: title
-  };
-}
-
-function upVoteVideo() {
-  return {
-    type: 'UP_VOTE_VIDEO'
-  };
-}
-
-function downVoteVideo() {
-  return {
-    type: 'DOWN_VOTE_VIDEO'
-  };
-}
-
-var initialState = {
-  title: '',
-  votes: {
-    up: 0,
-    down: 0
-  }
-};
-
-function instagramReducer() {
-  var instagramState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    case 'SET_TITLE':
-      return _objectSpread({}, instagramState, {
-        title: action.payload
-      });
-
-    case 'UP_VOTE_VIDEO':
-      return _objectSpread({}, instagramState, {
-        votes: _objectSpread({}, instagramState.votes, {
-          up: instagramReducer.votes.up + 1
-        })
-      });
-
-    case 'DOWN_VOTE_VIDEO':
-      return _objectSpread({}, instagramReducer, {
-        votes: _objectSpread({}, instagramState.votes, {
-          down: instagramState.votes.down - 1
-        })
-      });
-
-    default:
-      return instagramState;
-  }
-}
-},{}],"Redux/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _redux = require("redux");
-
-var _count = _interopRequireDefault(require("./actions-creators & reducers/count"));
-
-var _favoriteThings = _interopRequireDefault(require("./actions-creators & reducers/favoriteThings"));
-
-var _instagram = _interopRequireDefault(require("./actions-creators & reducers/instagram"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var rootReducer = (0, _redux.combineReducers)({
-  count: _count.default,
-  favoriteThings: _favoriteThings.default,
-  instagram: _instagram.default
-});
-var store = (0, _redux.createStore)(rootReducer);
-store.subscribe(function () {
-  return store.getState();
-});
-var _default = store;
-exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js","./actions-creators & reducers/count":"Redux/actions-creators & reducers/count.js","./actions-creators & reducers/favoriteThings":"Redux/actions-creators & reducers/favoriteThings.js","./actions-creators & reducers/instagram":"Redux/actions-creators & reducers/instagram.js"}],"index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../styles/Button":"styles/Button.js","../actions":"actions/index.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -38691,23 +38707,23 @@ var _reactDom = require("react-dom");
 
 var _reactRedux = require("react-redux");
 
-var _hello = _interopRequireDefault(require("./components/hello"));
+var _Couting = _interopRequireDefault(require("./components/Couting"));
 
-var _Redux = _interopRequireDefault(require("./Redux"));
+var _reducers = _interopRequireDefault(require("./reducers"));
+
+var _Favoriting = _interopRequireDefault(require("./components/Favoriting"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
-  return _react.default.createElement("div", null, _react.default.createElement(_hello.default, {
-    name: "Tony, a very good coach"
-  }));
+  return _react.default.createElement("div", null, _react.default.createElement(_Couting.default, null), _react.default.createElement(_Favoriting.default, null));
 };
 
 exports.App = App;
 (0, _reactDom.render)(_react.default.createElement(_reactRedux.Provider, {
-  store: _Redux.default
+  store: _reducers.default
 }, _react.default.createElement(App, null)), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","./components/hello":"components/hello.js","./Redux":"Redux/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","react-redux":"../node_modules/react-redux/es/index.js","./components/Couting":"components/Couting.js","./reducers":"reducers/index.js","./components/Favoriting":"components/Favoriting.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -38735,7 +38751,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50506" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55288" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,12 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import Hello from './components/hello';
-import store from './Redux';
+import Counting from './components/Couting';
+import store from './reducers';
+import Favoriting from './components/Favoriting';
 
 export const App = () => (
   <div>
-    <Hello name="Tony, a very good coach" />
+    <Counting />
+    <Favoriting />
   </div>
 );
 
