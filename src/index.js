@@ -1,6 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import Hello from './components/hello';
+import store from './Redux';
 
 export const App = () => (
   <div>
@@ -8,4 +10,9 @@ export const App = () => (
   </div>
 );
 
-render(<App />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
