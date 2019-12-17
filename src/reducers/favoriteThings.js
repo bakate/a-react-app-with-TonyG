@@ -3,11 +3,8 @@ export default function favoriteThingsReducer(favoriteThings = [], action) {
     case 'ADD_FAVORITE_THING':
       return [...favoriteThings, { id: action.id, text: action.text }];
     case 'REMOVE_FAVORITE_THING': {
-      const updatedArr = [
-        ...favoriteThings.slice(0, action.id),
-        ...favoriteThings.slice(action.action.id + 1),
-      ];
-
+      const updatedArr = [...favoriteThings];
+      updatedArr.filter(deletedId => deletedId.id !== action.id);
       return updatedArr;
     }
     default:

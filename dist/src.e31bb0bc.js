@@ -38600,7 +38600,11 @@ function favoriteThingsReducer() {
 
     case 'REMOVE_FAVORITE_THING':
       {
-        var updatedArr = [].concat(_toConsumableArray(favoriteThings.slice(0, action.id)), _toConsumableArray(favoriteThings.slice(action.action.id + 1)));
+        var updatedArr = _toConsumableArray(favoriteThings);
+
+        updatedArr.filter(function (deletedId) {
+          return deletedId.id !== action.id;
+        });
         return updatedArr;
       }
 
@@ -38679,7 +38683,10 @@ var Favoriting = function Favoriting(_ref) {
   }, "Add"), _react.default.createElement("h3", null, "Here are your Favorite Things"), _react.default.createElement("ul", null, favorite.map(function (fav) {
     return _react.default.createElement("li", {
       key: fav.id
-    }, fav);
+    }, fav.text, _react.default.createElement("button", {
+      type: "submit",
+      onClick: removeFavoriteThing
+    }, "\xD7"));
   })))));
 };
 
@@ -38751,7 +38758,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55288" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50010" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

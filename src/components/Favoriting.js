@@ -29,7 +29,12 @@ const Favoriting = ({ favorite, addFavoriteThing, removeFavoriteThing }) => {
           <h3>Here are your Favorite Things</h3>
           <ul>
             {favorite.map(fav => (
-              <li key={fav.id}>{fav}</li>
+              <li key={fav.id}>
+                {fav.text}
+                <button type="submit" onClick={removeFavoriteThing}>
+                  &times;
+                </button>
+              </li>
             ))}
           </ul>
         </ButtonStyles>
