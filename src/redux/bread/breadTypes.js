@@ -1,0 +1,2 @@
+export const INCREASE_BREAD = 'INCREASE_BREAD';
+export const DECREASE_BREAD = 'DECREASE_BREAD';
